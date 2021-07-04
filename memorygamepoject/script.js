@@ -34,7 +34,7 @@ function game() {
         if (firstClick.id == secondClick.id) {
         console.log('Its a match!') 
         count++;
-        
+        win();
             firstClick.removeEventListener('click', game);
             secondClick.removeEventListener('click', game);
             scorecount += 5;
@@ -56,3 +56,42 @@ function game() {
         }
     }   
 }
+function win() {
+    if (count == 6)
+    console.log('You win');
+    
+}
+win();
+
+let timer = setInterval(countTimer, 1000);
+let totalSeconds = 0;
+function countTimer() {
+           ++totalSeconds;
+           
+           let hour = Math.floor(totalSeconds /3600);
+           let minute = Math.floor((totalSeconds - hour*3600)/60);
+           let seconds = totalSeconds - (hour*3600 + minute*60);
+           if(hour < 10)
+             hour = "0"+hour;
+           if(minute < 10)
+             minute = "0"+minute;
+           if(seconds < 10)
+             seconds = "0"+seconds;
+
+           document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+         
+        }
+    
+function pause(){
+    card.forEach(card => {
+      card.removeEventListener('click', game);
+        clearInterval(timer);
+       
+    }); }
+ function play(){
+     timer=setInterval(countTimer, 1000);
+    card.forEach(card => {
+        card.addEventListener('click', game);
+    });}
+
+       
